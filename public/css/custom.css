@@ -1,0 +1,42 @@
+.page-container{
+    background-color: rgba(0,0,255,0.5);
+    position: relative;
+    min-height: 100vh;
+}
+.content-wrap {
+    padding-bottom: 5.7rem;    /* Footer height */
+}
+.nav-logo{
+    display: inline-block;
+}
+.logo-container a{
+    color:unset;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 5.7rem;            /* Footer height */
+}
+
+#footer .fa {
+    font-size: 30px;
+    margin: 0 19px 0 19px;
+}
+#footer a{
+    color:unset;
+}
+
+
+
+
+
+
+@media only screen and (max-width: 730px) {
+
+    button.flex.items-center.text-sm.font-medium.text-gray-500.hover\:text-gray-700.hover\:border-gray-300.focus\:outline-none.focus\:text-gray-700.focus\:border-gray-300.transition.duration-150.ease-in-out {
+        margin-left: 20px;
+    }
+    
+}
