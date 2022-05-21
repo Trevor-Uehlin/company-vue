@@ -3,7 +3,6 @@ import AppLayout from '@/Layouts/App.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 </script>
 
-<link rel="stylesheet" href="{{ mix('css/home.css') }}"> 
 
 <template>
     <Head title="About" />

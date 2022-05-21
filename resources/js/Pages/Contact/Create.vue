@@ -1,6 +1,8 @@
 
 <template>
 
+    <Head title="Contact Me" />
+
     <AppLayout>
 
         <template #header>

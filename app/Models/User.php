@@ -53,4 +53,18 @@ class User extends Authenticatable {
 
         $this->notify(new NewAccount($this));
     }
+
+    public function toStandardClass() {
+
+        $user = new \stdClass();
+
+        $user->id = $this->id;
+        $user->name = $this->name;
+        $user->email = $this->email;
+        $user->created = $this->created_at->format("M, d, Y");
+        $user->role = $this->role->name;
+        $user->isAdmin = $this->isAdministrator();
+
+        return $user;
+    }
 }

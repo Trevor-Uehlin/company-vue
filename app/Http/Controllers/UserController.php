@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
+use Carbon\Carbon;
 use App\Models\User;
 
 class UserController extends Controller {
@@ -12,9 +14,20 @@ class UserController extends Controller {
     public function index() {
 
         $users = User::get();
+
+        $usersArray = [];
+
+        foreach($users as $user){
+
+            $usersArray[] = $user->toStandardClass();
+        }
+
         $currentUser = Auth::user();
 
-        return view("user.index", compact("users", "currentUser"));
+        return Inertia::render("User/Index",[
+            "users" => $usersArray,
+            "currentUser" => $currentUser
+        ]);
     }
 
 
@@ -41,6 +54,8 @@ class UserController extends Controller {
     }
 
     public function show($id) {
+
+        var_dump("Hello from show");exit;
         
         $user = User::findOrFail($id);
 
