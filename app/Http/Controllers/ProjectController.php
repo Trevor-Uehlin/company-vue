@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 use App\Models\Project;
 use App\Models\Image;
 
@@ -17,19 +19,33 @@ class ProjectController extends Controller {
 
     public function index() {
 
+        $user = auth()->user()->tostandardClass();
+
         $projects = Project::orderBy("priority")->get();
 
-        return view('projects.index', compact("projects"));
+        $pArray = [];
+
+        foreach($projects as $p) {
+            $pArray[] = $p->toStandardClass();
+        }
+
+        return Inertia::render("Projects/Index", [
+            "projects" => $pArray,
+            "user"     => $user 
+        ]);
     }
 
 
     public function create() {
 
-        return view('projects.create');
+        return Inertia::render("Projects/Create");
     }
 
 
     public function store(Request $request) {
+
+        //Known bug: You can't do file uploads on patch and put requests.
+        if(!empty($request->id)) return $this->update($request, $request->id);
 
         $project = new Project();
         $project->title = $request['title'];
@@ -60,9 +76,9 @@ class ProjectController extends Controller {
 
     public function show($id) {
 
-        $project = Project::find($id);
+        $project = Project::find($id)->toStandardClass();
 
-        return view('projects.edit', compact('project'));
+        return Inertia::render("Projects/Edit", ["project" => $project]);
     }
 
 

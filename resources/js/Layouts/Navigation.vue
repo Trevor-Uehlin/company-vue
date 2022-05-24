@@ -29,6 +29,9 @@ const showingNavigationDropdown = ref(false);
 
                     <!-- Navigation Links (Desktop) -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <BreezeNavLink :href="route('projects')" :active="route().current('projects')">
+                            My Projects
+                        </BreezeNavLink>
                         <BreezeNavLink :href="route('about')" :active="route().current('about')">
                             About Me
                         </BreezeNavLink>
@@ -95,6 +98,10 @@ const showingNavigationDropdown = ref(false);
             <div class="pt-2 pb-3 space-y-1">
                 <BreezeResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')" v-if="$page.props.auth.user">
                     Dashboard
+                </BreezeResponsiveNavLink>
+
+                <BreezeResponsiveNavLink :href="route('projects')" :active="route().current('projects')" v-if="$page.props.auth.user">
+                    My Projects
                 </BreezeResponsiveNavLink>
 
                 <BreezeResponsiveNavLink :href="route('about')" :active="route().current('about')">

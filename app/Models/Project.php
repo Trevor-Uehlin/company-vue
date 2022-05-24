@@ -27,4 +27,20 @@ class Project extends Model {
 
         return $this->belongsToMany(Image::class);
     }
+
+    public function toStandardClass() {
+
+        $project = new \stdClass();
+
+        $project->id = $this->id;
+        $project->priority = $this->priority;
+        $project->created_at = $this->created_at->format("D, F, Y");
+        $project->title = $this->title;
+        $project->url = $this->url;
+        $project->organization = $this->organization;
+        $project->description = $this->description;
+        $project->images = $this->images;
+
+        return $project;
+    }
 }

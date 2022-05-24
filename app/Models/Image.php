@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     use HasFactory;
+
+
+
+    public function toStandardClass() {
+
+        $image = new \stdClass();
+
+        var_dump($this);exit;
+    }
 }

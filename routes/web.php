@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Auth;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 /*
@@ -25,17 +25,33 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+
 Route::get('/about', function(){ return Inertia::render('Top-Level/About'); })->name('about');
 
 Route::resource('/contact', 'App\Http\Controllers\EmailController')->names(['index' => 'contact', 'store' => 'send']);
+
+
 
 Route::resource("/users", "App\Http\Controllers\UserController")->middleware(['admin']);
 
 
 
+// Index is a public route...the rest are admin only.  (see the constructor)
+Route::resource('/projects', 'App\Http\Controllers\ProjectController')->names(['index' => 'projects']);
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Top-Level/Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::resource('/images', 'App\Http\Controllers\ImageController');
+
+
+
+route::middleware(['auth', 'verified'])->group(function(){
+
+    route::get('/dashboard', function(){
+
+        $user = auth()->user()->toStandardClass();
+        return Inertia::render('Top-Level/Dashboard', ['user' => $user]);
+    })->name('dashboard');
+});
 
 require __DIR__.'/auth.php';
