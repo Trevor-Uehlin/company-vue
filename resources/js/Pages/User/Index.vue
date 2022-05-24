@@ -7,6 +7,9 @@ defineProps({
 </script>
 
 <template>
+
+    <Head title="Users" />
+
     <AppLayout>
 
         <template #header>

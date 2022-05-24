@@ -22,12 +22,7 @@ class UserController extends Controller {
             $usersArray[] = $user->toStandardClass();
         }
 
-        $currentUser = Auth::user();
-
-        return Inertia::render("User/Index",[
-            "users" => $usersArray,
-            "currentUser" => $currentUser
-        ]);
+        return Inertia::render("User/Index",["users" => $usersArray]);
     }
 
 
@@ -55,11 +50,9 @@ class UserController extends Controller {
 
     public function show($id) {
         
-        $user = User::findOrFail($id)->toStandardClass();
+        $user = User::findOrFail($id);
 
-        var_dump($user);exit;
-
-        return view("user.edit", compact("user"));
+        return Inertia::render("User/Edit", ["user" => $user]);
     }
 
     public function edit($id) {}
@@ -72,9 +65,7 @@ class UserController extends Controller {
 
         $user->name = $params["name"];
         $user->email = $params["email"];
-        $user->role_id = $params["user_type"];
-
-        if(!empty($params["password"])) $user->password = Hash::make($_POST["password"]);
+        $user->role_id = $params["role_id"];
 
         $user->update();
 
