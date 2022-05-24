@@ -33,17 +33,17 @@ class UserController extends Controller {
 
     public function create() {
         
-        return view("user.create");
+        return Inertia::render("User/Create");
     }
 
 
     public function store(Request $request) {
 
         $user = User::create([
-            'name' => $_POST["name"],
-            'email' => $_POST["email"],
-            'role_id' => $_POST["user_type"],
-            'password' => Hash::make($_POST["password"]),
+            'name' => $request->name,
+            'email' => $request->email,
+            'role_id' => $request->role_id,
+            'password' => Hash::make(str_random(10)),
         ]);
         
 
@@ -54,10 +54,10 @@ class UserController extends Controller {
     }
 
     public function show($id) {
-
-        var_dump("Hello from show");exit;
         
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($id)->toStandardClass();
+
+        var_dump($user);exit;
 
         return view("user.edit", compact("user"));
     }

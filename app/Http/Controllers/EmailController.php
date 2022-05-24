@@ -20,7 +20,8 @@ class EmailController extends Controller {
 
     public function store(Request $request) {
 
-        Mail::to(env('APP_EMAIL_ADDRESS'))->send(new ContactMe($request));
+        // Need some validation of the request.
+        $result = Mail::to(env('APP_EMAIL_ADDRESS'))->send(new ContactMe($request));
 
         return Inertia::render("Contact/Success");
     }

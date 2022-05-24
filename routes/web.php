@@ -29,7 +29,7 @@ Route::get('/about', function(){ return Inertia::render('Top-Level/About'); })->
 
 Route::resource('/contact', 'App\Http\Controllers\EmailController')->names(['index' => 'contact', 'store' => 'send']);
 
-Route::resource("/users", "App\Http\Controllers\UserController");
+Route::resource("/users", "App\Http\Controllers\UserController")->middleware(['admin']);
 
 
 
