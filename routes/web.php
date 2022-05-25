@@ -30,6 +30,10 @@ Route::get('/about', function(){ return Inertia::render('Top-Level/About'); })->
 
 Route::resource('/contact', 'App\Http\Controllers\EmailController')->names(['index' => 'contact', 'store' => 'send']);
 
+# Playground Routes
+Route::resource('weather', 'App\Http\Controllers\WeatherController')->names(['index' => 'weather']);
+Route::get("/other", function(){ return Inertia::render("Playground/Other");} )->name('other');
+
 
 
 Route::resource("/users", "App\Http\Controllers\UserController")->middleware(['admin']);

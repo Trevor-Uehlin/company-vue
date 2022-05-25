@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use Inertia\Inertia;
 
 class WeatherController extends Controller {
 
@@ -27,11 +28,15 @@ class WeatherController extends Controller {
 
         $weather = $this->parse($locationInfo, $weatherInfo);
 
-        return view("playground.weather.index", compact("weather"));
+        return Inertia::render("Playground/Weather/Index", ["weather" => $weather]);
     }
 
 
     public function parse($location, $weather) {
+
+        $imageBaseUrl = "http://openweathermap.org/img/wn/";
+        $imageExtension = ".png";
+        $icon = $weather["current"]['weather'][0]['icon'];
 
         $parsed = [];
         $parsed["city"] = $location["city"];
@@ -39,6 +44,7 @@ class WeatherController extends Controller {
         $parsed["today"]["mostly"] = $weather["current"]['weather'][0]['main'];
         $parsed["today"]["description"] = $weather["current"]['weather'][0]['description'];
         $parsed["today"]["icon"] = $weather["current"]['weather'][0]['icon'];
+        $parsed["today"]["imageUrl"] = $imageBaseUrl.$icon.$imageExtension;
         $parsed["today"]["currentTemp"] = floor($this->toFarenheit($weather['current']['temp']));
         $parsed["today"]["feelsLike"] = floor($this->toFarenheit($weather['current']['feels_like']));
         $parsed["today"]["maxTemp"] = floor($this->toFarenheit($weather["daily"][0]["temp"]["max"]));
@@ -48,11 +54,17 @@ class WeatherController extends Controller {
         $parsed["today"]["visibility"] = substr($weather["current"]["visibility"], 0, 2);
         $parsed["today"]["windSpeed"] = $weather["current"]["wind_speed"];
 
+
+
         foreach($weather["daily"] as $daily) {
 
             $date = new Carbon($daily["dt"]);
             $day = $date->format("D");
 
+            $icon = $daily["weather"][0]["icon"];
+
+            $parsed["forcast"][$day]["imageUrl"] = $imageBaseUrl.$icon.$imageExtension;
+            $parsed["forcast"][$day]["day"] = $day;
             $parsed["forcast"][$day]["icon"] = $daily["weather"][0]["icon"];
             $parsed["forcast"][$day]["maxTemp"] = floor($this->toFarenheit($daily["temp"]["max"]));
             $parsed["forcast"][$day]["minTemp"] = floor($this->toFarenheit($daily["temp"]["min"]));
