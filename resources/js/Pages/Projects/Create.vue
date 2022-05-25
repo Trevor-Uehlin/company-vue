@@ -72,11 +72,11 @@ export default {
     },
     setup() {
         const form = useForm({
-            priority: 10,
-            title: "Test Project",
-            organization: "Test Org",
-            url: "test@example.com",
-            description: "test description",
+            priority: null,
+            title: null,
+            organization: null,
+            url: null,
+            description: null,
             file: null
         });
 

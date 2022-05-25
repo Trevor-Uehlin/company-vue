@@ -39,8 +39,6 @@ Route::resource("/users", "App\Http\Controllers\UserController")->middleware(['a
 // Index is a public route...the rest are admin only.  (see the constructor)
 Route::resource('/projects', 'App\Http\Controllers\ProjectController')->names(['index' => 'projects']);
 
-
-
 Route::resource('/images', 'App\Http\Controllers\ImageController');
 
 

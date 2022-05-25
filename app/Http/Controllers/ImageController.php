@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use App\Models\Image;
 
 class ImageController extends Controller {
@@ -35,6 +36,6 @@ class ImageController extends Controller {
         DB::table('image_project')->where('image_id', $image->id)->delete();
         $image->delete();
 
-        return redirect(route("projects"));
+        return redirect(URL::previous());
     }
 }

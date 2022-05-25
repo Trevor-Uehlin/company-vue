@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Project;
 use App\Models\Image;
+use App\Models\User;
 
 class ProjectController extends Controller {
 
@@ -19,7 +20,9 @@ class ProjectController extends Controller {
 
     public function index() {
 
-        $user = auth()->user()->tostandardClass();
+        $user = auth()->user();
+
+        $user = empty($user) ? new User() : $user->toStandardClass();
 
         $projects = Project::orderBy("priority")->get();
 
@@ -44,7 +47,7 @@ class ProjectController extends Controller {
 
     public function store(Request $request) {
 
-        //Known bug: You can't do file uploads on patch and put requests.
+        //Known bug: You can't do file uploads on patch and put requests in Laravel/Vue projects.
         if(!empty($request->id)) return $this->update($request, $request->id);
 
         $project = new Project();

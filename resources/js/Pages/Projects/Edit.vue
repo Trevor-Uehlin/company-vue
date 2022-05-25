@@ -19,32 +19,32 @@
                             <input type="hidden" name="id" id="id">
 
                             <div class="form-group">
-                                <label for="priority">Priority</label>
+                                <label class="mb-0" for="priority">Priority</label>
                                 <input type="text" name="priority" class="block mt-1 w-full rounded" v-model="form.priority"  required >
                             </div>
 
                             <div class="form-group">
-                                <label for="title">Title</label>
+                                <label class="mb-0" for="title">Title</label>
                                 <input type="text" name="title" class="block mt-1 w-full rounded" v-model="form.title"  required >
                             </div>
 
                             <div class="form-group">
-                                <label for="organization">Organization</label>
+                                <label class="mb-0" for="organization">Organization</label>
                                 <input type="text" name="organization" class="block mt-1 w-full rounded" v-model="form.organization"  required >
                             </div>
 
                             <div class="form-group">
-                                <label for="url">URL</label>
+                                <label class="mb-0" for="url">URL</label>
                                 <input type="text" name="url" class="block mt-1 w-full rounded" v-model="form.url"  required >
                             </div>
 
                             <div class="form-group">
-                                <label for="description">Description</label>
+                                <label class="mb-0" for="description">Description</label>
                                 <input type="text" name="description" class="block mt-1 w-full rounded" v-model="form.description"  required >
                             </div>
 
                             <div class="form-group">
-                                <label for="file">Upload an Image</label>
+                                <label class="mb-0" for="file">Add an Image</label>
                                 <input type="file" name="file" class="block mt-1 w-full rounded" v-on:change="handleFile" >
                             </div>
 
@@ -57,6 +57,18 @@
                     </div>
                 </div>
             </div>
+
+            <div class="container bg-white mt-2 py-2">
+                <h3 class="text-center">Current Project Images</h3>
+                <p class="text-center">Currently showing {{project.images.length}} image(s)</p>
+                <div v-for="image in project.images" :key="image.path" class="mt-1 border border-dark p-2">
+                    <img :src="'/' + image.path" :alt="image.title">
+
+                    <button class="btn btn-dark m-2" @click="deleteImage(image.id)">Delete Image</button>
+                </div>
+            </div>
+
+
         </div>
 
 
@@ -100,7 +112,16 @@ export default {
         },
         handleFile(e) {
             this.form.file = e.target.files[0];
+        },
+        deleteImage(id) {
+            if(confirm("Are you sure you want to delete this image?")){
+                this.$inertia.delete(route("images.destroy", id));
+            }
         }
     },
 };
 </script>
+
+<style scoped>
+
+</style>

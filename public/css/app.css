@@ -664,6 +664,12 @@ select {
 .float-right {
   float: right;
 }
+.m-4 {
+  margin: 1rem;
+}
+.m-2 {
+  margin: 0.5rem;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -726,11 +732,11 @@ select {
 .mt-1 {
   margin-top: 0.25rem;
 }
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
 .mb-0 {
   margin-bottom: 0px;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 .block {
   display: block;
