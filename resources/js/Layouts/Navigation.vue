@@ -131,7 +131,7 @@ const showingNavigationDropdown = ref(false);
                     Dashboard
                 </BreezeResponsiveNavLink>
 
-                <BreezeResponsiveNavLink :href="route('projects')" :active="route().current('projects')" v-if="$page.props.auth.user">
+                <BreezeResponsiveNavLink :href="route('projects')" :active="route().current('projects')">
                     My Projects
                 </BreezeResponsiveNavLink>
 

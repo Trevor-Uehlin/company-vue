@@ -23915,8 +23915,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href", "active"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.$page.props.auth.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["BreezeResponsiveNavLink"], {
-    key: 1,
+  , ["href", "active"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BreezeResponsiveNavLink"], {
     href: _ctx.route('projects'),
     active: _ctx.route().current('projects')
   }, {
@@ -23928,7 +23927,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href", "active"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BreezeResponsiveNavLink"], {
+  , ["href", "active"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BreezeResponsiveNavLink"], {
     href: _ctx.route('about'),
     active: _ctx.route().current('about')
   }, {
@@ -26577,7 +26576,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.weather-container[data-v-13a4c88c]{\r\n    background-color: blue;\r\n    color:white;\n}\n.icon[data-v-13a4c88c]{\r\n    height: 5rem;\n}\n@media screen and (max-width:750px) {\n.forcast[data-v-13a4c88c]{\r\n        margin-top:40px;\n}\n.ml-5[data-v-13a4c88c], .text-center[data-v-13a4c88c]{\r\n        margin-left:unset !important;\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.weather-container[data-v-13a4c88c]{\n    background-color: blue;\n    color:white;\n}\n.icon[data-v-13a4c88c]{\n    height: 5rem;\n}\n@media screen and (max-width:750px) {\n.forcast[data-v-13a4c88c]{\n        margin-top:40px;\n}\n.ml-5[data-v-13a4c88c], .text-center[data-v-13a4c88c]{\n        margin-left:unset !important;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -26601,7 +26600,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.carousel__item[data-v-7ec75246] {\r\n  min-height: 200px;\r\n  width: 100%;\r\n  background-color: var(--vc-clr-primary);\r\n  color:  var(--vc-clr-white);\r\n  font-size: 20px;\r\n  border-radius: 8px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.carousel__slide[data-v-7ec75246] {\r\n  padding: 10px;\n}\n.carousel__prev[data-v-7ec75246],\r\n.carousel__next[data-v-7ec75246] {\r\n  box-sizing: content-box;\r\n  border: 5px solid white;\n}\nimg[data-v-7ec75246]{\r\n    width: 100%;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.carousel__item[data-v-7ec75246] {\n  min-height: 200px;\n  width: 100%;\n  background-color: var(--vc-clr-primary);\n  color:  var(--vc-clr-white);\n  font-size: 20px;\n  border-radius: 8px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.carousel__slide[data-v-7ec75246] {\n  padding: 10px;\n}\n.carousel__prev[data-v-7ec75246],\n.carousel__next[data-v-7ec75246] {\n  box-sizing: content-box;\n  border: 5px solid white;\n}\nimg[data-v-7ec75246]{\n    width: 100%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

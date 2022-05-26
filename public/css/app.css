@@ -664,11 +664,11 @@ select {
 .float-right {
   float: right;
 }
-.m-4 {
-  margin: 1rem;
-}
 .m-2 {
   margin: 0.5rem;
+}
+.m-4 {
+  margin: 1rem;
 }
 .mx-auto {
   margin-left: auto;
