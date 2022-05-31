@@ -94,7 +94,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .carousel__item {
   min-height: 200px;
   width: 100%;
@@ -117,7 +117,11 @@ export default {
   border: 5px solid white;
 }
 
-img{
-    width: 100%;
+@media screen and (max-width: 750px) {
+
+    .carousel__prev, .carousel__next {
+        display: none;
+    }
 }
+
 </style>
