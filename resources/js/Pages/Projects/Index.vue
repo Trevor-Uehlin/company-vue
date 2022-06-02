@@ -25,7 +25,7 @@
                             <p>{{project.description}}</p>
                         </div>
 
-                        <div>
+                        <div class="carousel-container">
                             <carousel :items-to-show="1" :wrap-around="true">
                                 <slide v-for="image in project.images" :key="image.path">
                                     <img :src="image.path" :alt="image.title">
@@ -115,6 +115,12 @@ export default {
 .carousel__next {
   box-sizing: content-box;
   border: 5px solid white;
+}
+
+.carousel-container {
+    border-style: solid;
+    border-color: black;
+    border-width: 5px;
 }
 
 @media screen and (max-width: 750px) {
