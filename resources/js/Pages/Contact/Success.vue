@@ -3,7 +3,11 @@ import AppLayout from '@/Layouts/App.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 </script>
 
+
 <template>
+
+    <Head title="Success" />
+    
     <AppLayout>
 
         <div class="py-12">
