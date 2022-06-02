@@ -51,7 +51,8 @@ import { Head, useForm } from '@inertiajs/inertia-vue3';
 
 export default {
     components: {
-        AppLayout
+        AppLayout,
+        Head
     },
     setup() {
         const form = useForm({
