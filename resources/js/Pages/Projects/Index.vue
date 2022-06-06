@@ -42,7 +42,7 @@
 
 
 
-                        <div v-if="user.isAdmin" class="row">
+                        <div v-if="user.isAdmin" class="row mt-3">
 
                             <button class="btn btn-dark mx-2" @click="editProject(project.id)">Edit Project</button>
                             <button class="btn btn-dark mx-2" @click="deleteProject(project.id)">Delete Project</button>
