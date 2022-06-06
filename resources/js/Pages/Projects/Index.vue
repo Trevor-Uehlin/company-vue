@@ -19,7 +19,7 @@
                         <div class="border p-2 rounded">
                             <p class="float-right">Published: {{project.created_at}}</p>
                             <p v-if="user.isAdmin" class="mb-0">Priority: {{project.priority}}</p>
-                            <p class="h4"><strong><Link :href="project.url" style="color: blue;">{{project.title}}</Link></strong></p>
+                            <p class="h4"><strong><a :href="project.url" target="_blank" style="color: blue;">{{project.title}}</a></strong></p>
                             <p><strong>Organization: </strong>{{project.organization}}</p>
                             <p class="mb-0"><strong>Description</strong></p>
                             <p>{{project.description}}</p>
