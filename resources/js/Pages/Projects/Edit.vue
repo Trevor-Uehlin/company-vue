@@ -40,7 +40,7 @@
 
                             <div class="form-group">
                                 <label class="mb-0" for="description">Description</label>
-                                <textarea type="text" name="description" class="block mt-1 w-full rounded" v-model="form.description"  required ></textarea>
+                                <textarea type="text" rows="10" name="description" class="block mt-1 w-full rounded h-100" v-model="form.description"  required ></textarea>
                             </div>
 
                             <div class="form-group">
