@@ -22,7 +22,9 @@
                             <p class="h4"><strong><a :href="project.url" target="_blank" style="color: blue;">{{project.title}}</a></strong></p>
                             <p><strong>Organization: </strong>{{project.organization}}</p>
                             <p class="mb-0"><strong>Description</strong></p>
-                            <p>{{project.description}}</p>
+                            <div class="description-container" style="white-space: pre-line;">
+                                <p>{{project.description}}</p>
+                            </div>
                         </div>
 
                         <div class="carousel-container">
@@ -77,7 +79,9 @@ export default {
         user: Object,
         projects: Array
     },
-    setup() {},
+    setup(props) {
+        //console.log(props.projects[0].description);
+    },
     methods: {
         editProject(id) {
             this.$inertia.get(this.route('projects.show', id));
