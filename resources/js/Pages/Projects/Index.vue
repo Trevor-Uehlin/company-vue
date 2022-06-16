@@ -9,6 +9,7 @@
                 My Projects
                 <Link v-if="user.isAdmin" :href="route('projects.create')" class="float-right"><i class="fa fa-plus" style="font-size:35px;color:blue;"></i></Link>
                 <p class="text-sm mb-0">Showing {{projects.length}} projects(s)</p>
+                <p>Disclaimer: Project descriptions are a work in progress.</p>
             </h2>
         </template>
 
