@@ -65,13 +65,13 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
                 <h2 class="text-center">Projects...The Quick List</h2>
                 <p class="text-center">See <Link :href="route('projects')">my projects</Link> for screenshots and details.)</p>
 
-                <h5>Professional</h5>
+                <h5>Oregon Criminal Defense Lawyers Association (OCDLA)</h5>
                 <ul>
-                    <li>&bull;&nbsp;<a href="https://ocdla.org/" target="_blank">Oregon Criminal Defense Lawyers Association - Home</a></li>
-                    <li>&bull;&nbsp;<a href="https://lod.ocdla.org/" target="_blank">Oregon Criminal Defense Lawyers Association - Library of Defense</a></li>
-                    <li>&bull;&nbsp;<a href="https://ocdla.app/car/list" target="_blank">Oregon Criminal Defense Lawyers Association - Appellate Case Reviews</a></li>
-                    <li>&bull;&nbsp;<a href="https://ocdla.app/directory/members" target="_blank">Oregon Criminal Defense Lawyers Association - Member/Expert Witness Directory</a></li>
-                    <li>&bull;&nbsp;<a href="https://ocdla.app/jobs" target="_blank">Oregon Criminal Defense Lawyers Association - Job Board</a></li>
+                    <li>&bull;&nbsp;<a href="https://ocdla.org/" target="_blank">OCDLA - Home</a></li>
+                    <li>&bull;&nbsp;<a href="https://lod.ocdla.org/" target="_blank">OCDLA - Library of Defense</a></li>
+                    <li>&bull;&nbsp;<a href="https://ocdla.app/car/list" target="_blank">OCDLA - Appellate Case Reviews</a></li>
+                    <li>&bull;&nbsp;<a href="https://ocdla.app/directory/members" target="_blank">OCDLA - Member/Expert Witness Directory</a></li>
+                    <li>&bull;&nbsp;<a href="https://ocdla.app/jobs" target="_blank">OCDLA - Job Board</a></li>
                 </ul>
 
                 <h5>Freelance and Personal </h5>
