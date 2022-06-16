@@ -143,7 +143,7 @@ const showingNavigationDropdown = ref(false);
                     Contact Me
                 </BreezeResponsiveNavLink>
 
-                <div class="sm:flex sm:items-center sm:ml-6">
+                <div class="sm:flex sm:items-center sm:ml-6 ml-1">
                     <!-- Settings Dropdown -->
                     <div class="ml-3 relative">
                         <BreezeDropdown width="48">
