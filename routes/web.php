@@ -33,6 +33,7 @@ Route::resource('/contact', 'App\Http\Controllers\EmailController')->names(['ind
 # Playground Routes
 Route::resource('weather', 'App\Http\Controllers\WeatherController')->names(['index' => 'weather']);
 Route::get("/other", function(){ return Inertia::render("Playground/Other");} )->name('other');
+Route::resource('auth/net', 'App\Http\Controllers\AuthorizeDotNetController')->names(['index' => 'payments']);
 
 
 
