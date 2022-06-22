@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use net\authorize\api\contract\v1 as AnetAPI;
 use net\authorize\api\controller as AnetController;
 use \net\authorize\api\constants\ANetEnvironment;
+use App\Models\PaymentProfile;
 
 
 class AuthorizeDotNetController extends Controller {
@@ -15,7 +16,7 @@ class AuthorizeDotNetController extends Controller {
 
         $myCustomerProfileId = "506144082";
         $merchantAuthentication = $this->getMerchantAuthentication();
-        $endpoint = env("AUTHORIZE_DOT_NET_USE_PRODUCTION_ENDPOINT") == false ? ANetEnvironment::PRODUCTION : ANetEnvironment::SANDBOX;
+        $endpoint = ((boolean)env("AUTHORIZE_DOT_NET_USE_PRODUCTION_ENDPOINT")) ? ANetEnvironment::PRODUCTION : ANetEnvironment::SANDBOX;
 
         $request = new AnetAPI\GetCustomerProfileRequest();
         $request->setMerchantAuthentication($merchantAuthentication);
@@ -31,7 +32,10 @@ class AuthorizeDotNetController extends Controller {
         $customerProfile = $response->getProfile();
         $paymentProfiles = $customerProfile->getPaymentProfiles();
 
-        var_dump($response, $paymentProfiles);exit;
+        $customProfileObjects = [];
+        foreach($paymentProfiles as $profile) $customProfileObjects[] = PaymentProfile::fromMaskedType($profile);
+
+        var_dump($customProfileObjects);exit;
 
         return Inertia::render("Playground/AuthorizeDotNet/Index");
     }
