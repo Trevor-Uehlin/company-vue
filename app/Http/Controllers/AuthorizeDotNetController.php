@@ -4,82 +4,65 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use net\authorize\api\contract\v1 as AnetAPI;
+use net\authorize\api\controller as AnetController;
+use \net\authorize\api\constants\ANetEnvironment;
 
-class AuthorizeDotNetController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+
+class AuthorizeDotNetController extends Controller {
+
+    public function index() {
+
+        $myCustomerProfileId = "506144082";
+        $merchantAuthentication = $this->getMerchantAuthentication();
+        $endpoint = env("AUTHORIZE_DOT_NET_USE_PRODUCTION_ENDPOINT") == false ? ANetEnvironment::PRODUCTION : ANetEnvironment::SANDBOX;
+
+        $request = new AnetAPI\GetCustomerProfileRequest();
+        $request->setMerchantAuthentication($merchantAuthentication);
+        $request->setCustomerProfileId($myCustomerProfileId);
+        $controller = new AnetController\GetCustomerProfileController($request);
+        $response = $controller->executeWithApiResponse($endpoint);
+
+        if(!$this->responseSuccess($response)){
+
+            var_dump($response->getMessages());exit;
+        }
+
+        $customerProfile = $response->getProfile();
+        $paymentProfiles = $customerProfile->getPaymentProfiles();
+
+        var_dump($response, $paymentProfiles);exit;
+
         return Inertia::render("Playground/AuthorizeDotNet/Index");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+
+    public function getMerchantAuthentication() {
+
+        $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
+        $merchantAuthentication->setName(env("AUTHORIZE_DOT_NET_API_MERCHANT_LOGIN_ID"));
+        $merchantAuthentication->setTransactionKey(env("AUTHORIZE_DOT_NET_MERCHANT_TRANSACTION_KEY"));
+
+        return $merchantAuthentication;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function responseSuccess($response) {
+
+        $successCode = "OK";
+
+        return $response->getMessages()->getResultCode() !== $successCode;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    public function create() {}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    public function store(Request $request) {}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    public function show($id) {}
+    
+    public function edit($id) {}
+
+    public function update(Request $request, $id) {}
+
+    public function destroy($id) {}
 }
