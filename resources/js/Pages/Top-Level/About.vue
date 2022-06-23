@@ -45,13 +45,13 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
                 <h2 class="text-center">Skills</h2>
 
                 <ul>
-                    <li>&bull;&nbsp;MediaWiki - Skins, Extensions, Adiministration</li>
-                    <li>&bull;&nbsp;WordPress - Themes, Plugins, Adiministration</li>
+                    <li>&bull;&nbsp;MediaWiki - Skins, Extensions, Administration</li>
+                    <li>&bull;&nbsp;WordPress - Themes, Plugins, Administration</li>
                     <li>&bull;&nbsp;Laravel - Version 7-9</li>
                     <li>&bull;&nbsp;Component Based JavaScript Frameworks - Vue 3, React</li>
-                    <li>&bull;&nbsp;Salesforce - Apex, DX CLI, VisualForce(pages, components), Adiministration</li>
+                    <li>&bull;&nbsp;Salesforce - Apex, DX CLI, VisualForce(pages, components), Administration</li>
                     <li>&bull;&nbsp;Linux, Apache, PHP, MySQL, JavaScript, HTML, CSS</li>
-                    <li>&bull;&nbsp;Version Control - GIT, GitHub, Packagist, Composer</li>
+                    <li>&bull;&nbsp;Version Control and Package Management - GIT, GitHub, Packagist, Composer</li>
                     <li>&bull;&nbsp;Integrated Development Environments - VS Code, Visual Studio, Salesforce Development Console</li>
                     <li>&bull;&nbsp;Online Payment Integration - Authorize.net, Cybersource</li>
                     <li>&bull;&nbsp;Asp.Net Core with C#</li>
