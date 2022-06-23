@@ -34,7 +34,7 @@ class Project extends Model {
 
         $project->id = $this->id;
         $project->priority = $this->priority;
-        $project->created_at = $this->created_at->format("D, F, Y");
+        $project->created_at = $this->created_at->format("D, F jS, Y");
         $project->title = $this->title;
         $project->url = $this->url;
         $project->organization = $this->organization;
