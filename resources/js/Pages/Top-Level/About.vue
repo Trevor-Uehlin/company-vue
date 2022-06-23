@@ -26,14 +26,14 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
                 <div class="container bg-white mt-2 p-2">
                 <h2 class="text-center">Education and Certifications</h2>
 
-                <h5>Degree</h5>
+                <h5><strong>Degree</strong></h5>
                 <ul>
                     <li>&bull;&nbsp;Associate of Applied Science - Computer Programming</li>
                     <li>&nbsp;&nbsp;&nbsp;Lane Community College - Eugene, OR</li>
                     <li>&nbsp;&nbsp;&nbsp;Graduated on 06/2019</li>
                 </ul>
 
-                <h5>Lane Community College Degree Certifications</h5>
+                <h5><strong>Lane Community College Degree Certifications</strong></h5>
                 <ul>
                     <li>&bull;&nbsp;Front-End Web Development</li>
                     <li>&bull;&nbsp;Mobile Application Development</li>
@@ -65,7 +65,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
                 <h2 class="text-center">Projects...The Quick List</h2>
                 <p class="text-center">See <Link :href="route('projects')">my projects</Link> for screenshots and details.)</p>
 
-                <h5>Oregon Criminal Defense Lawyers Association (OCDLA)</h5>
+                <h5><strong>Oregon Criminal Defense Lawyers Association (OCDLA)</strong></h5>
                 <ul>
                     <li>&bull;&nbsp;<a href="https://ocdla.org/" target="_blank">OCDLA - Home</a></li>
                     <li>&bull;&nbsp;<a href="https://lod.ocdla.org/" target="_blank">OCDLA - Library of Defense</a></li>
@@ -74,7 +74,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
                     <li>&bull;&nbsp;<a href="https://ocdla.app/jobs" target="_blank">OCDLA - Job Board</a></li>
                 </ul>
 
-                <h5>Freelance and Personal </h5>
+                <h5><strong>Freelance and Personal</strong></h5>
                 <ul>
                     <li>&bull;&nbsp;<a href="https://redcedarcourt.com/" target="_blank">Red Cedar Court HOA - Member Only Site</a></li>
                     <li>&bull;&nbsp;<a href="https://fullbloomfitness.com/" target="_blank">Full Bloom Fitness - Home</a></li>
