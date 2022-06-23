@@ -18,7 +18,6 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-4 bg-white border-b border-gray-200">
                         <div class="border p-2 rounded">
-                            <p class="float-right">Published: {{project.created_at}}</p>
                             <p v-if="user.isAdmin" class="mb-0">Priority: {{project.priority}}</p>
                             <p class="h4"><strong><a :href="project.url" target="_blank" style="color: blue;">{{project.title}}</a></strong></p>
                             <p><strong>Organization: </strong>{{project.organization}}</p>
@@ -45,12 +44,16 @@
 
 
 
+
+
                         <div v-if="user.isAdmin" class="row mt-3">
 
                             <button class="btn btn-dark mx-2" @click="editProject(project.id)">Edit Project</button>
                             <button class="btn btn-dark mx-2" @click="deleteProject(project.id)">Delete Project</button>
                             
                         </div>
+
+                        <p class="float-right">Published: {{project.created_at}}</p>
                         
                     </div>
                 </div>
