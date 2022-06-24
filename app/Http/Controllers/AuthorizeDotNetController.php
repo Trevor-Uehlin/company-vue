@@ -32,12 +32,10 @@ class AuthorizeDotNetController extends Controller {
         $customerProfile = $response->getProfile();
         $paymentProfiles = $customerProfile->getPaymentProfiles();
 
-        $customProfileObjects = [];
-        foreach($paymentProfiles as $profile) $customProfileObjects[] = PaymentProfile::fromMaskedType($profile);
+        $stdObjPaymentProfiles = [];
+        foreach($paymentProfiles as $profile) $stdObjPaymentProfiles[] = PaymentProfile::fromMaskedTypeToStandardObject($profile);
 
-        var_dump($customProfileObjects);exit;
-
-        return Inertia::render("Playground/AuthorizeDotNet/Index");
+        return Inertia::render("Playground/AuthorizeDotNet/Index", ["paymentProfiles" => $stdObjPaymentProfiles]);
     }
 
 
