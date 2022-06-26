@@ -31,6 +31,9 @@ class PaymentProfile extends Model {
         $paymentProfile->zip = $billTo->getZip();
         $paymentProfile->country = $billTo->getCountry();
 
+        $icon = strtolower($paymentProfile->cardType);
+        $paymentProfile->icon = "fab fa-cc-$icon";
+
         return $paymentProfile;
     }
 }
