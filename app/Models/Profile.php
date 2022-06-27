@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Images;
+use App\Models\User;
 
 class Profile extends Model {
 
     use HasFactory;
 
     protected $fillable = [
-        "user_id",
         "priority",
         "phone",
         "about_info",
@@ -26,7 +26,22 @@ class Profile extends Model {
         return $this->belongsToMany(Image::class);
     }
 
+    public function user() {
+        
+        return $this->hasOne(User::class);
+    }
 
+
+    public function email() {
+
+        return $this->user->email;
+    }
+
+
+    public function username() {
+
+        return $this->user->name;
+    }
 
     public function toStandardClass() {
 
@@ -36,6 +51,8 @@ class Profile extends Model {
         $profile->priority = $this->priority;
         $profile->created_at = $this->created_at->format("D, F, Y");
         $profile->phone = $this->phone;
+        $profile->email = $this->email();
+        $profile->username = $this->username();
         $profile->about_info = $this->about_info;
         $profile->images = $this->images;
 
