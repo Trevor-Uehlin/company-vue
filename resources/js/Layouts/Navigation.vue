@@ -59,6 +59,9 @@ const showingNavigationDropdown = ref(false);
                                         <BreezeDropdownLink :href="route('weather')" as="button">
                                             Weather
                                         </BreezeDropdownLink>
+                                        <BreezeDropdownLink :href="route('payments')" as="button">
+                                            Authorize.net
+                                        </BreezeDropdownLink>
                                         <BreezeDropdownLink :href="route('other')" as="button">
                                             Other
                                         </BreezeDropdownLink>
@@ -162,6 +165,9 @@ const showingNavigationDropdown = ref(false);
                             <template #content>
                                 <BreezeDropdownLink :href="route('weather')" as="button">
                                     Weather
+                                </BreezeDropdownLink>
+                                <BreezeDropdownLink :href="route('payments')" as="button">
+                                    Authorize.net
                                 </BreezeDropdownLink>
                                 <BreezeDropdownLink :href="route('other')" as="button">
                                     Other

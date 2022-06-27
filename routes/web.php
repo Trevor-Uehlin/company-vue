@@ -33,11 +33,12 @@ Route::resource('/contact', 'App\Http\Controllers\EmailController')->names(['ind
 # Playground Routes
 Route::resource('weather', 'App\Http\Controllers\WeatherController')->names(['index' => 'weather']);
 Route::get("/other", function(){ return Inertia::render("Playground/Other");} )->name('other');
+Route::resource('auth/net', 'App\Http\Controllers\AuthorizeDotNetController')->names(['index' => 'payments']);
 
 
 
 Route::resource("/users", "App\Http\Controllers\UserController")->middleware(['admin']);
-
+Route::resource("/profile", "App\Http\Controllers\ProfileController")->middleware(['auth']);
 
 
 // Index is a public route...the rest are admin only.  (see the constructor)

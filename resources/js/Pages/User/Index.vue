@@ -26,10 +26,12 @@ defineProps({
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-4 bg-white border-b border-gray-200">
 
-                            <p>Created: {{user.created}}</p>
-                            <p class="h4 mb-0"><strong>{{user.name}}</strong></p>
-                            <p class="mb-0"><strong>Email: </strong>{{user.email}}</p>
-                            <p><strong>User Type: </strong>{{user.role}}</p>
+                            <p class="m-0 tx-sm float-right">Created: {{user.created}}</p>
+                            <p class="h4 mb-1"><strong>{{user.name}}</strong></p>
+                            <p class="m-0"><strong>Email: </strong>{{user.email}}</p>
+                            <p class="m-0"><strong>User Type: </strong>{{user.role}}</p>
+                            <p class="m-0"><strong>Phone:{{user.profile.phone}}</strong></p>
+                            <p class="mb-2"><strong>About Information:</strong>{{user.profile.about_info}}</p>
 
                             <div class="row">
 
