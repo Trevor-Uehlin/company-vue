@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Role;
 use App\Notifications\NewAccount;
+use App\Models\Profile;
 
 class User extends Authenticatable {
 
@@ -20,7 +21,8 @@ class User extends Authenticatable {
         'name',
         'email',
         'password',
-        'role_id'
+        'role_id',
+        "profile_id"
     ];
 
     // Not going to use softDeletes for now.
@@ -40,6 +42,12 @@ class User extends Authenticatable {
 
         return $this->belongsTo(Role::class);
     }
+
+    public function profile() {
+
+        return $this->belongsTo(Profile::class);
+    }
+
 
     public function isAdministrator() {
 
@@ -64,6 +72,7 @@ class User extends Authenticatable {
         $user->created = $this->created_at->format("M, d, Y");
         $user->role = $this->role->name;
         $user->isAdmin = $this->isAdministrator();
+        $user->profile = $this->profile;
 
         return $user;
     }

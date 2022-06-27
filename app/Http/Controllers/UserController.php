@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Profile;
 
 class UserController extends Controller {
 
@@ -34,10 +35,13 @@ class UserController extends Controller {
 
     public function store(Request $request) {
 
+        $profile = Profile::create([]);
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'role_id' => $request->role_id,
+            'profile_id' => $profile->id,
             'password' => Hash::make(str_random(10)),
         ]);
         
@@ -76,7 +80,9 @@ class UserController extends Controller {
     public function destroy($id) {
 
         $user = User::findOrFail($id);
+        $profile = Profile::findOrFail($user->profile_id);
 
+        $profile->delete();
         $user->delete();
 
         return redirect(route("users.index"));

@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Profile;
 
 class DatabaseSeeder extends Seeder {
 
@@ -17,12 +18,15 @@ class DatabaseSeeder extends Seeder {
         DB::insert('insert into roles (name) values (?)', ['administrator']);
         DB::insert('insert into roles (name) values (?)', ['subscriber']);
 
+        $profile = Profile::create([]);
+
 
         $user = User::create([
             'name' => 'Trevor Uehlin',
             'email' => 'tuehlin.web.dev@gmail.com',
             'role_id' => '1',
             'password' => Hash::make('kjldjfo9ksjv36'),
+            'profile_id' => $profile->id
         ]);
 
         $user->sendNewAccountNotification();
