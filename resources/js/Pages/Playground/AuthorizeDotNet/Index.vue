@@ -16,7 +16,7 @@
                         <p class="card-text mt-2 mb-0"><strong>Billing Information</strong></p>
                         <p class="card-text m-0">{{profile.address}}</p>
                         <p class="card-text m-0">{{profile.city +", "+ profile.state +" "+ profile.zip}}</p>
-                        <p class="card-text m-0">{{profile.phone}}</p>
+                        <p class="card-text">{{profile.phone}}</p>
 
                         <div class="row">
                             <button onclick="editCard" class="btn btn-dark btn-small ml-2">Edit Card</button>
