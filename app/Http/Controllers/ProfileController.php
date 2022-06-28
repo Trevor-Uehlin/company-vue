@@ -56,10 +56,13 @@ class ProfileController extends Controller {
         $profile->about_info = $request->about_info;
         $profile->user->email = $request->email;
 
-        DB::table(self::IMAGE_PIVOT_TABLE)->insert([
-            'image_id' => $image->id,
-            'profile_id'  => $profile->id
-        ]);
+        if(!empty($image)) {
+
+            DB::table(self::IMAGE_PIVOT_TABLE)->insert([
+                'image_id' => $image->id,
+                'profile_id'  => $profile->id
+            ]);
+        }
         
 
         if(!empty($request->priority)) $profile->priority = $request->priority;
