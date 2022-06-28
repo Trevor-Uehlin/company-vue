@@ -51,7 +51,7 @@ Route::resource('/images', 'App\Http\Controllers\ImageController');
 
 
 
-route::middleware(['auth', 'verified'])->group(function(){
+Route::middleware(['auth', 'verified'])->group(function(){
 
     route::get('/dashboard', function(){
 
@@ -59,5 +59,8 @@ route::middleware(['auth', 'verified'])->group(function(){
         return Inertia::render('Top-Level/Dashboard', ['user' => $user]);
     })->name('dashboard');
 });
+
+
+Route::get("delete/account", [App\Http\Controllers\UserController::class, 'deleteAccount'])->name('account.delete');
 
 require __DIR__.'/auth.php';

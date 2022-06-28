@@ -87,4 +87,16 @@ class UserController extends Controller {
 
         return redirect(route("users.index"));
     }
+
+    public function deleteAccount() {
+
+        $user = auth()->user();
+        $profile = $user->profile;
+        $images = $profile->images;
+
+        $profile->delete();
+        $user->delete();
+
+        return redirect("logout");
+    }
 }

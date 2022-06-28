@@ -14,12 +14,15 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        You're logged in!
+                        Your Account
                         <br />
                         <i class="fa fa-edit" style="font-size:20px;color:blue;"></i><Link :href="route('profile.edit', {id: user.profile.id})"> Edit Your Profile</Link>
                         <br />
                         <i class="fa fa-camera" style="font-size:20px;color:blue;"></i><Link :href="route('profile.gallery')"> See your gallery</Link>
                         <br />
+                        <br />
+                        <br />
+                        <i class="fa fa-trash" style="font-size:20px;color:red"></i><Link @click="confirm()" :href="(route('account.delete'))"> Delete Account</Link>
                     </div>
                 </div>
             </div>
@@ -58,6 +61,13 @@ export default {
     },
     setup(props) {
         //console.log(props.user.isAdmin);
-    }
+    },
+    methods: {
+        confirm(){
+            if(confirm("Are you sure you want to delete your account?")) {
+                this.$inertia.get(this.route('delete.account'));
+            }
+        }
+    },
 }
 </script>
