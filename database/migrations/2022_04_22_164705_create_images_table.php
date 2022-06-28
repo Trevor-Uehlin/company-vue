@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('title');
             $table->integer('size');
             $table->string('type');
+            $table->string('pivot_table');
+            $table->integer('priority')->default(2);
             $table->timestamps();
         });
     }

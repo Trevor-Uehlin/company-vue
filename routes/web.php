@@ -39,10 +39,13 @@ Route::resource('auth/net', 'App\Http\Controllers\AuthorizeDotNetController')->n
 
 Route::resource("/users", "App\Http\Controllers\UserController")->middleware(['admin']);
 Route::resource("/profile", "App\Http\Controllers\ProfileController")->middleware(['auth']);
+Route::get('my/gallary', [App\Http\Controllers\ProfileController::class, 'showGallary'])->name('profile.gallery');
+Route::get('set/image/{id}', [App\Http\Controllers\ProfileController::class, 'setImage'])->name('profile.image');
 
 
 // Index is a public route...the rest are admin only.  (see the constructor)
 Route::resource('/projects', 'App\Http\Controllers\ProjectController')->names(['index' => 'projects']);
+
 
 Route::resource('/images', 'App\Http\Controllers\ImageController');
 

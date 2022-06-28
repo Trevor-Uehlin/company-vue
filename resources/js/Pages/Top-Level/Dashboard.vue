@@ -18,6 +18,8 @@
                         <br />
                         <i class="fa fa-edit" style="font-size:20px;color:blue;"></i><Link :href="route('profile.edit', {id: user.profile.id})"> Edit Your Profile</Link>
                         <br />
+                        <i class="fa fa-camera" style="font-size:20px;color:blue;"></i><Link :href="route('profile.gallery')"> See your gallery</Link>
+                        <br />
                     </div>
                 </div>
             </div>

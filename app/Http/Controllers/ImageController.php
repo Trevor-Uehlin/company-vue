@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use App\Models\Image;
+use Inertia\Inertia;
 
 class ImageController extends Controller {
 
@@ -33,7 +34,7 @@ class ImageController extends Controller {
         $image = Image::find($id);
 
         Storage::delete($image->path);
-        DB::table('image_project')->where('image_id', $image->id)->delete();
+        DB::table($image->pivot_table)->where('image_id', $image->id)->delete();
         $image->delete();
 
         return redirect(URL::previous());

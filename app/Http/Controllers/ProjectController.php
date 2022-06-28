@@ -13,6 +13,9 @@ use App\Models\User;
 
 class ProjectController extends Controller {
 
+    private const IMAGE_PIVOT_TABLE = "image_project";
+    private const IMAGE_STORAGE_DIRECTORY = "project-images";
+
     public function __construct() {
 
         $this->middleware('admin')->except('index');
@@ -60,15 +63,16 @@ class ProjectController extends Controller {
         $file = $request->file('file');
 
         $image = new Image();
-        $image->path = $file->store('project-images');
+        $image->path = $file->store(self::IMAGE_STORAGE_DIRECTORY);
         $image->title = $file->getClientOriginalName();
         $image->size = $file->getSize();
         $image->type = $file->extension();
+        $image->pivot_table = self::IMAGE_PIVOT_TABLE;
 
         $project->save();
         $image->save();
 
-        DB::table('image_project')->insert([
+        DB::table(self::IMAGE_PIVOT_TABLE)->insert([
             'image_id' => $image->id,
             'project_id'  => $project->id
         ]);
@@ -106,15 +110,16 @@ class ProjectController extends Controller {
         if(!empty($file)) {
 
             $image = new Image();
-            $image->path = $file->store('project-images');
+            $image->path = $file->store(self::IMAGE_STORAGE_DIRECTORY);
             $image->title = $file->getClientOriginalName();
             $image->size = $file->getSize();
             $image->type = $file->extension();
+            $image->pivot_table = self::IMAGE_PIVOT_TABLE;
     
     
             $image->save();
     
-            DB::table('image_project')->insert([
+            DB::table(self::IMAGE_PIVOT_TABLE)->insert([
                 'image_id' => $image->id,
                 'project_id'  => $project->id
             ]);
@@ -132,7 +137,7 @@ class ProjectController extends Controller {
         foreach($images as $image){
 
             Storage::delete($image->path);
-            DB::table('image_project')->where('project_id', $project->id)->delete();
+            DB::table(self::IMAGE_PIVOT_TABLE)->where('project_id', $project->id)->delete();
             $image->delete();
         }
 
