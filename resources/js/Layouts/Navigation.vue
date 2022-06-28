@@ -60,7 +60,7 @@ const showingNavigationDropdown = ref(false);
                                             Weather
                                         </BreezeDropdownLink>
                                         <BreezeDropdownLink :href="route('payments')" as="button">
-                                            Authorize.net
+                                            Online Payment
                                         </BreezeDropdownLink>
                                         <BreezeDropdownLink :href="route('other')" as="button">
                                             Other
@@ -167,7 +167,7 @@ const showingNavigationDropdown = ref(false);
                                     Weather
                                 </BreezeDropdownLink>
                                 <BreezeDropdownLink :href="route('payments')" as="button">
-                                    Authorize.net
+                                    Online Payment
                                 </BreezeDropdownLink>
                                 <BreezeDropdownLink :href="route('other')" as="button">
                                     Other
