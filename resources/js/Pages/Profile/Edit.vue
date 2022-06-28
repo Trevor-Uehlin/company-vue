@@ -9,8 +9,14 @@
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
+
+                        <div class="text-center">
+                            <img :src="'/' + profile.profile_image.path" :alt="profile.profile_image.title" class="img-thumbnail center-block">
+                        </div>
     
-                        <form>
+                        <form @submit.prevent = submit>
+
+                            <input type="hidden" name="id" v-model="form.id">
 
                             <div class="form-group">
                                 <label for="phone">Phone</label>
@@ -28,12 +34,12 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="file">Upload an image for your profile</label>
-                                <input type="file" name="file" class="block mt-1 w-full rounded" value="">
+                                <label for="file">Upload an image for your profile picture or your gallery.</label>
+                                <input type="file" name="file" class="block mt-1 w-full rounded" v-on:change="handlefile">
                             </div>
 
                             <div class="form-group">
-                                <button onclick="submit" class="btn btn-dark btn-small">Save</button>
+                                <button type="submit" class="btn btn-dark btn-small">Save Profile</button>
                             </div>
 
 
@@ -62,16 +68,24 @@ export default {
         profile: Object
     },
     setup(props) {
-
-        console.log(props.profile.phone)
-
+        
         const form = useForm({
+            id: props.profile.id,
             phone: props.profile.phone,
             email: props.profile.email,
-            about_info: props.profile.about_info
+            about_info: props.profile.about_info,
+            file:null
         });
 
         return {form};
+    },
+    methods:{
+        submit() {
+            this.form.post(route("profile.store"));
+        },
+        handlefile(e){
+            this.form.file = e.target.files[0];
+        }
     }
 }
 </script>

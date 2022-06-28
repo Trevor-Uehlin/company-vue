@@ -43,6 +43,11 @@ class Profile extends Model {
         return $this->user->name;
     }
 
+    public function profileImage() {
+
+        return Image::find($this->profile_image_id);
+    }
+
     public function toStandardClass() {
 
         $profile = new \stdClass();
@@ -54,6 +59,7 @@ class Profile extends Model {
         $profile->email = $this->email();
         $profile->username = $this->username();
         $profile->about_info = $this->about_info;
+        $profile->profile_image = $this->profileImage();
         $profile->images = $this->images;
 
         return $profile;
