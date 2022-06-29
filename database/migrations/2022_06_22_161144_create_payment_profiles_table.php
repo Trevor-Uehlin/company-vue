@@ -16,11 +16,9 @@ return new class extends Migration
         Schema::create('payment_profiles', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('user_id');
             $table->integer('exp_month');
             $table->integer('exp_year');
-            $table->integer('customer_profile_id');
-            $table->integer('payment_profile_id');
+            $table->integer('external_id');
         });
     }
 

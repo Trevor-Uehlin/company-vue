@@ -20,11 +20,9 @@ class AuthorizeDotNetController extends Controller {
     }
 
     public function index() {
-
-        $merchantAuthentication = $this->getMerchantAuthentication();
         
         $request = new AnetAPI\GetCustomerProfileRequest();
-        $request->setMerchantAuthentication($merchantAuthentication);
+        $request->setMerchantAuthentication($this->getMerchantAuthentication());
         $request->setCustomerProfileId($this->customerProfileId);
         $controller = new AnetController\GetCustomerProfileController($request);
         $response = $controller->executeWithApiResponse($this->endpoint);
@@ -70,53 +68,36 @@ class AuthorizeDotNetController extends Controller {
 
     public function store(Request $request) {
 
-        var_dump($request->all());exit;
-
-        $paymentProfileDb new PaymentProfile();
-
-        $merchantAuthentication = $this->getMerchantAuthentication();
-
-        $refId = 'ref' . time();
-    
-        // Set credit card information for payment profile
-        $creditCard = new AnetAPI\CreditCardType();
-        $creditCard->setCardNumber($request->cardNumber);
-        $creditCard->setExpirationDate($request->expYear ."-". $request->expMonth);
-        $paymentType = new AnetAPI\PaymentType();
-        $paymentType->setCreditCard($creditCard);
-    
-        // Create the Bill To info for new payment type
-        $billto = new AnetAPI\CustomerAddressType();
-        $billto->setFirstName($request->firstName);
-        $billto->setLastName($request->lastName);
-        $billto->setAddress($request->address);
-        $billto->setCity($request->city);
-        $billto->setState($request->state);
-        $billto->setZip($request->zip);
-        $billto->setCountry("USA");
-        $billto->setPhoneNumber($request->phone);
-    
         // Create a new Customer Payment Profile object
-        $PaymentProfile = new AnetAPI\CustomerPaymentProfileType();
-        $PaymentProfile->setCustomerType('individual');
-        $PaymentProfile->setBillTo($billto);
-        $PaymentProfile->setPayment($paymentType);
-        $PaymentProfile->setDefaultPaymentProfile(true);
-    
+        $paymentProfile = new AnetAPI\CustomerPaymentProfileType();
+        $paymentProfile->setCustomerType('individual');
+        $paymentProfile->setBillTo($this->billTo($request));
+        $paymentProfile->setPayment($this->paymentType($request));
+        $paymentProfile->setDefaultPaymentProfile(true);
+
         // Assemble the complete transaction request
-        $PaymentProfileRequest = new AnetAPI\CreateCustomerPaymentProfileRequest();
-        $PaymentProfileRequest->setMerchantAuthentication($merchantAuthentication);
+        $paymentProfileRequest = new AnetAPI\CreateCustomerPaymentProfileRequest();
+        $paymentProfileRequest->setMerchantAuthentication($this->getMerchantAuthentication());
     
         // Add an existing profile id to the request
-        $PaymentProfileRequest->setCustomerProfileId($this->customerProfileId);
-        $PaymentProfileRequest->setPaymentProfile($PaymentProfile);
-        $PaymentProfileRequest->setValidationMode("liveMode");
+        $paymentProfileRequest->setCustomerProfileId($this->customerProfileId);
+        $paymentProfileRequest->setPaymentProfile($paymentProfile);
+        $paymentProfileRequest->setValidationMode("liveMode");
     
         // Create the controller and get the response
-        $controller = new AnetController\CreateCustomerPaymentProfileController($PaymentProfileRequest);
-        $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::SANDBOX);
+        $controller = new AnetController\CreateCustomerPaymentProfileController($paymentProfileRequest);
+        $response = $controller->executeWithApiResponse($this->endpoint);
 
-        if($this->responseSuccess($response)) return redirect(route("payments"));
+        if($this->responseSuccess($response)) {
+
+            $payment_profile = new PaymentProfile();
+            $payment_profile->exp_month = $request->expMonth;
+            $payment_profile->exp_year = $request->expYear;
+            $payment_profile->external_id = $response->getCustomerProfileId();
+            $payment_profile->save();
+
+            return redirect(route("payments"));
+        }
 
         else throw new \Exception($response->getMessages());
     }
@@ -139,5 +120,33 @@ class AuthorizeDotNetController extends Controller {
     public function destroy($id) {
 
         var_dump("Hello from destroy");exit;
+    }
+
+    // Create the Bill To info for new payment type
+    public function billTo($request) {
+
+        $billTo = new AnetAPI\CustomerAddressType();
+        $billTo->setFirstName($request->firstName);
+        $billTo->setLastName($request->lastName);
+        $billTo->setAddress($request->address);
+        $billTo->setCity($request->city);
+        $billTo->setState($request->state);
+        $billTo->setZip($request->zip);
+        $billTo->setCountry("USA");
+        $billTo->setPhoneNumber($request->phone);
+
+        return $billTo;
+    }
+
+    public function paymentType($request) {
+
+        // Set credit card information for payment profile
+        $creditCard = new AnetAPI\CreditCardType();
+        $creditCard->setCardNumber($request->cardNumber);
+        $creditCard->setExpirationDate($request->expYear ."-". $request->expMonth);
+        $paymentType = new AnetAPI\PaymentType();
+        $paymentType->setCreditCard($creditCard);
+
+        return $paymentType;
     }
 }
