@@ -1,13 +1,15 @@
 <template>
     <AppLayout>
 
-        <Head title="New Card" />
-        
+        <Head title="Edit Card" />
+
         <div class="container px-5">
 
-            <h2>Add a New Payment Method</h2>
+            <h2>Edit a Payment Method</h2>
 
             <form @submit.prevent="submit">
+
+                <input type="hidden" name="id" v-model="form.id" />
 
                 <div class="row">
                     <div class="col-md-8">
@@ -157,19 +159,23 @@ export default {
         Link,
         useForm
     },
-    setup() {
+    props:{
+        profile: Array
+    },
+    setup(props) {
         const form = useForm({
-            firstName: null,
-            lastName: null,
-            cardNumber: null,
-            expMonth: null,
-            expYear: null,
-            default: null,
-            address: null,
-            city: null,
-            state: null,
-            zip: null,
-            phone: null
+            id : props.profile.id,
+            firstName: props.profile.firstName,
+            lastName: props.profile.lastName,
+            cardNumber: props.profile.cardNumber,
+            expMonth: props.profile.exp_month,
+            expYear: props.profile.exp_year,
+            default: props.profile.default,
+            address: props.profile.address,
+            city: props.profile.city,
+            state: props.profile.state,
+            zip: props.profile.zip,
+            phone: props.profile.zip
         });
 
         return {form}

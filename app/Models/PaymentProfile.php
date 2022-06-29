@@ -9,15 +9,17 @@ class PaymentProfile extends Model {
 
     use HasFactory;
 
-    public static function fromMaskedTypeToStandardObject($maskedType) {
+    public function fromMaskedTypeToStandardObject($maskedType) {
 
         $paymentProfile = new \stdClass();
+        $paymentProfile->id = $this->id;
         $paymentProfile->isDefault = !empty($maskedType->getDefaultPaymentProfile());
 
         $creditCard = $maskedType->getPayment()->getCreditCard();
         $paymentProfile->cardType = $creditCard->getCardType();
         $paymentProfile->cardNumber = $creditCard->getCardNumber();
-        $paymentProfile->expirationDate = $creditCard->getExpirationDate();
+        $paymentProfile->exp_year = $this->exp_year;
+        $paymentProfile->exp_month = $this->exp_month;
 
         $billTo = $maskedType->getBillTo();
         $paymentProfile->phone = $billTo->getPhoneNumber();

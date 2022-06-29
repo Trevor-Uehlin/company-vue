@@ -27,10 +27,7 @@ class AuthorizeDotNetController extends Controller {
         $controller = new AnetController\GetCustomerProfileController($request);
         $response = $controller->executeWithApiResponse($this->endpoint);
 
-        if(!$this->responseSuccess($response)){
-
-            var_dump($response->getMessages());exit;
-        }
+        if(!$this->responseSuccess($response)) throw new \Exception($response->getMessages());
 
         $customerProfile = $response->getProfile();
         $paymentProfiles = $customerProfile->getPaymentProfiles();
@@ -38,7 +35,11 @@ class AuthorizeDotNetController extends Controller {
         if(empty($paymentProfiles)) $paymentProfiles = [];
 
         $stdObjPaymentProfiles = [];
-        foreach($paymentProfiles as $profile) $stdObjPaymentProfiles[] = PaymentProfile::fromMaskedTypeToStandardObject($profile);
+        foreach($paymentProfiles as $profile) {
+
+            $paymentProfile = PaymentProfile::where("external_id", "=", $profile->getCustomerPaymentProfileId())->get()->first();
+            $stdObjPaymentProfiles[] = $paymentProfile->fromMaskedTypeToStandardObject($profile);
+        }
 
         return Inertia::render("Playground/AuthorizeDotNet/Index", ["paymentProfiles" => $stdObjPaymentProfiles]);
     }
@@ -68,6 +69,8 @@ class AuthorizeDotNetController extends Controller {
 
     public function store(Request $request) {
 
+        var_dump($request);exit;
+
         // Create a new Customer Payment Profile object
         $paymentProfile = new AnetAPI\CustomerPaymentProfileType();
         $paymentProfile->setCustomerType('individual');
@@ -93,7 +96,7 @@ class AuthorizeDotNetController extends Controller {
             $payment_profile = new PaymentProfile();
             $payment_profile->exp_month = $request->expMonth;
             $payment_profile->exp_year = $request->expYear;
-            $payment_profile->external_id = $response->getCustomerProfileId();
+            $payment_profile->external_id = $response->getCustomerPaymentProfileId();
             $payment_profile->save();
 
             return redirect(route("payments"));
@@ -104,7 +107,23 @@ class AuthorizeDotNetController extends Controller {
 
     public function show($id) {
 
-        var_dump("Hello from show");exit;
+        $payment_profile = PaymentProfile::find($id);
+
+        $request = new AnetAPI\GetCustomerPaymentProfileRequest();
+        $request->setMerchantAuthentication($this->getMerchantAuthentication());
+        $request->setCustomerProfileId($this->customerProfileId);
+        $request->setCustomerPaymentProfileId($payment_profile->external_id);
+    
+        $controller = new AnetController\GetCustomerPaymentProfileController($request);
+        $response = $controller->executeWithApiResponse($this->endpoint);
+
+        if($this->responseSuccess($response)) {
+
+            $profile = $payment_profile->fromMaskedTypeToStandardObject($response->getPaymentProfile());
+            return Inertia::render("Playground/AuthorizeDotNet/EditCard", ["profile" => $profile]);
+        }
+
+        else throw new \Exception($response->getMessages());
     }
     
     public function edit($id) {
@@ -119,7 +138,22 @@ class AuthorizeDotNetController extends Controller {
 
     public function destroy($id) {
 
-        var_dump("Hello from destroy");exit;
+        $payment_profile = PaymentProfile::find($id);
+
+        $request = new AnetAPI\DeleteCustomerPaymentProfileRequest();
+        $request->setMerchantAuthentication($this->getMerchantAuthentication());
+        $request->setCustomerProfileId($this->customerProfileId);
+        $request->setCustomerPaymentProfileId($payment_profile->external_id);
+        $controller = new AnetController\DeleteCustomerPaymentProfileController($request);
+        $response = $controller->executeWithApiResponse($this->endpoint);
+
+        if($this->responseSuccess($response)) {
+
+            $payment_profile->delete();
+            return redirect("payments");
+        }
+        
+        else throw new \Exception($response->getMessages());
     }
 
     // Create the Bill To info for new payment type

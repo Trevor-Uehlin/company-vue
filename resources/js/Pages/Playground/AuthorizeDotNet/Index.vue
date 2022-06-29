@@ -19,15 +19,15 @@
                             <font-awesome-icon :icon="profile.icon" class="float-right card-icon"/>
                         </p>
                         <p class="card-text m-0">ending in {{profile.cardNumber}}</p>
-                        <p class="card-text m-0">expires on {{profile.expirationDate}}</p>
+                        <p class="card-text m-0">expires on {{profile.exp_month +"-"+ profile.exp_year}}</p>
                         <p class="card-text mt-2 mb-0"><strong>Billing Information</strong></p>
                         <p class="card-text m-0">{{profile.address}}</p>
                         <p class="card-text m-0">{{profile.city +", "+ profile.state +" "+ profile.zip}}</p>
                         <p class="card-text">{{profile.phone}}</p>
 
                         <div class="row">
-                            <button onclick="editCard" class="btn btn-dark btn-xsmall ml-2">Edit Card</button>
-                            <Link :href="route('payments.destroy', profile.id)" class="btn btn-dark btn-xsmall ml-2">Delete</Link>
+                            <button class="btn btn-dark btn-xsmall mx-2" @click="editCard(profile.id)">Edit Card</button>
+                            <button class="btn btn-dark btn-xsmall mx-2" @click="deleteCard(profile.id)">Delete</button>
                         </div>
 
                     </div>
@@ -57,7 +57,17 @@ export default {
     },
     props:{
         paymentProfiles: Array
-    }
+    },
+    methods: {
+        editCard(id) {
+            this.$inertia.get(this.route('payments.show', id));
+        },
+        deleteCard(id) {
+            if(confirm("Are you sure you want to delete this card?")) {
+                this.$inertia.delete(this.route('payments.destroy', id));
+            }
+        }
+    },
 }
 </script>
 
