@@ -9,6 +9,7 @@
                 <h3 v-if="paymentProfiles.length == 0" >You don't have any saved payment methods</h3>
                 <h3 v-else>Your saved payment methods</h3>
                 <Link :href="route('payments.create')" class="btn btn-dark btn-xsmall">New Card</Link>
+                <span> Test card numbers <a  class="text-white" href="https://developer.authorize.net/hello_world/testing_guide.html" target="_blank">here.</a></span>
             </div>
 
             <div class="row">
@@ -16,6 +17,7 @@
                     <div class="card-body p-0">
                         <p class="card-title m-0">
                             <strong>{{profile.firstName +" "+ profile.lastName}}</strong>
+                            <strong v-if="profile.isDefault"> (default) </strong>
                             <font-awesome-icon :icon="profile.icon" class="float-right card-icon"/>
                         </p>
                         <p class="card-text m-0">ending in {{profile.cardNumber}}</p>

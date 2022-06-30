@@ -69,17 +69,21 @@ class AuthorizeDotNetController extends Controller {
 
     public function store(Request $request) {
 
-        var_dump($request);exit;
+        $isUpdate = !empty($request->id);
+
+        if($isUpdate) $paymentProfileId = PaymentProfile::find($request->id)->externald_id;
 
         // Create a new Customer Payment Profile object
-        $paymentProfile = new AnetAPI\CustomerPaymentProfileType();
+        $paymentProfile = $isUpdate ?  new AnetAPI\CustomerPaymentProfileExType() : new AnetAPI\CustomerPaymentProfileType();
         $paymentProfile->setCustomerType('individual');
         $paymentProfile->setBillTo($this->billTo($request));
         $paymentProfile->setPayment($this->paymentType($request));
-        $paymentProfile->setDefaultPaymentProfile(true);
+        $paymentProfile->setDefaultPaymentProfile($request->default);
+
+        if($isUpdate) $paymentProfile->setCustomerPaymentProfileId($paymentProfileId);
 
         // Assemble the complete transaction request
-        $paymentProfileRequest = new AnetAPI\CreateCustomerPaymentProfileRequest();
+        $paymentProfileRequest = $isUpdate ? new AnetAPI\UpdateCustomerPaymentProfileRequest() : new AnetAPI\CreateCustomerPaymentProfileRequest();
         $paymentProfileRequest->setMerchantAuthentication($this->getMerchantAuthentication());
     
         // Add an existing profile id to the request
@@ -88,16 +92,20 @@ class AuthorizeDotNetController extends Controller {
         $paymentProfileRequest->setValidationMode("liveMode");
     
         // Create the controller and get the response
-        $controller = new AnetController\CreateCustomerPaymentProfileController($paymentProfileRequest);
+        $controller = $isUpdate ? new AnetController\GetCustomerPaymentProfileController($paymentProfileRequest)
+                                : new AnetController\CreateCustomerPaymentProfileController($paymentProfileRequest);
+
         $response = $controller->executeWithApiResponse($this->endpoint);
 
         if($this->responseSuccess($response)) {
 
-            $payment_profile = new PaymentProfile();
+            $payment_profile = $isUpdate ? PaymentProfile::find($request->id) : new PaymentProfile();
             $payment_profile->exp_month = $request->expMonth;
             $payment_profile->exp_year = $request->expYear;
-            $payment_profile->external_id = $response->getCustomerPaymentProfileId();
-            $payment_profile->save();
+            if(!$isUpdate) $payment_profile->external_id = $response->getCustomerPaymentProfileId();
+
+            if($isUpdate) $payment_profile->update();
+            else $payment_profile->save();
 
             return redirect(route("payments"));
         }

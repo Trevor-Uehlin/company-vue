@@ -119,7 +119,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="inputbox mt-3 mr-2">
+                                    <div class="inputbox mt-3">
                                         <input type="tel" name="phone" class="form-control" v-model="form.phone" placeholder="555-555-5555" required />
                                         <span>Phone</span>
                                     </div>
