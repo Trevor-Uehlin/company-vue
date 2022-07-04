@@ -13,7 +13,7 @@
             </div>
 
             <div class="row">
-                <div v-for="profile in paymentProfiles" class="card m-2 w-25 p-2">
+                <div v-for="profile in paymentProfiles" class="card m-3 p-2">
                     <div class="card-body p-0">
                         <p class="card-title m-0">
                             <strong>{{profile.firstName +" "+ profile.lastName}}</strong>
@@ -73,9 +73,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .card-icon{
     font-size: 40px;
 }
+.card{
+    width:25%;
+}
     
+@media only screen and (max-width: 750px){
+    .card{
+        width:100%;
+    }
+}
 </style>
