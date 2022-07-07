@@ -16,7 +16,7 @@ class AuthorizeDotNetController extends Controller {
 
         $this->endpoint = ((boolean)env("AUTHORIZE_DOT_NET_USE_PRODUCTION_ENDPOINT")) ? ANetEnvironment::PRODUCTION : ANetEnvironment::SANDBOX;
         //$this->customerProfileId = auth()->user()->authorize_dot_net_customer_profile_id;
-        $this->customerProfileId = "506144082";
+        $this->customerProfileId = env("AUTHORIZE_DOT_NET_TESTING_CUSTOMER_PROFILE_ID");
     }
 
     public function index() {
