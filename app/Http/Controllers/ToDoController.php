@@ -56,6 +56,8 @@ class ToDoController extends Controller {
         $task->description = $request->description;
         $task->url = $request->url;
 
+        $task->update();
+
         return redirect(route('toDo.index'));
     }
 
