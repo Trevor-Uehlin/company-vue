@@ -12,7 +12,7 @@
             </h2>
         </template>
 
-        <div v-for="item in items" :key="item.id" class="mx-2">
+        <div v-for="item in items" :key="item.id" class="mx-2 my-2">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-4 bg-white border-b border-gray-200">

@@ -19,7 +19,7 @@
 
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <input type="text" name="description" class="block mt-1 w-full rounded" v-model="form.description"  required >
+                                <textarea type="text" rows="5" name="description" class="block mt-1 w-full rounded h-100" v-model="form.description"  required ></textarea>
                             </div>
 
                             <div class="form-group">
@@ -69,7 +69,7 @@ export default {
     },
     methods: {
         submit() {
-            this.form.post(route("toDo.update", this.form.id));
+            this.form.patch(route("toDo.update", this.form.id));
         },
         cancel() {
             this.$inertia.get(route("toDo.index"));

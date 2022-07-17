@@ -51,7 +51,12 @@ class ToDoController extends Controller {
 
     public function update(Request $request, $id) {
 
-        var_dump("update");exit;
+        $task = SiteToDoItem::find($id);
+        $task->priority = $request->priority;
+        $task->description = $request->description;
+        $task->url = $request->url;
+
+        return redirect(route('toDo.index'));
     }
 
     public function destroy($id) {
