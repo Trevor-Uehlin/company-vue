@@ -10,7 +10,9 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <form @submit.prevent = submit>
 
-                        <div class="form-group">
+                            <input type="hidden" name="id" v-model="form.id">
+
+                            <div class="form-group">
                                 <label for="priority">Priority</label>
                                 <input type="text" name="priority" class="block mt-1 w-full rounded" v-model="form.priority"  required >
                             </div>
@@ -26,7 +28,7 @@
                             </div>
 
                             <div class="row mt-4 px-6">
-                                <button type="submit" class="btn btn-dark">Create Task</button>
+                                <button type="submit" class="btn btn-dark">Update Task</button>
                                 <button type="button" class="btn btn-dark ml-4" @click = cancel>Cancel</button>
                             </div>
 
@@ -57,7 +59,7 @@ export default {
     setup(props) {
 
         const form = useForm({
-
+            id: props.item.id,
             priority: props.item.priority,
             description: props.item.description,
             url: props.item.url
@@ -67,10 +69,10 @@ export default {
     },
     methods: {
         submit() {
-            this.form.post(route("toDo.store"));
+            this.form.post(route("toDo.update", this.form.id));
         },
         cancel() {
-            this.$inertia.get(route("toDo"));
+            this.$inertia.get(route("toDo.index"));
         }
     },
 

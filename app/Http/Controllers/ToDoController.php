@@ -27,18 +27,21 @@ class ToDoController extends Controller {
 
     public function store(Request $request) {
 
+
         SiteToDoItem::create([
             'priority' => $request->priority,
             'description' => $request->description,
             'url' => $request->url
         ]);
 
-        return redirect(route('toDo'));
+        return redirect(route('toDo.index'));
     }
 
     public function show($id) {
 
-        var_dump("show");exit;
+        $item = SiteToDoItem::find($id);
+
+        return Inertia::render('ToDo/Edit', ['item' => $item]);
     }
 
     public function edit($id) {
@@ -53,6 +56,10 @@ class ToDoController extends Controller {
 
     public function destroy($id) {
 
-        var_dump("destroy");exit;
+        $item = SiteToDoItem::find($id);
+
+        $item->delete();
+
+        return redirect(route('toDo.index'));
     }
 }

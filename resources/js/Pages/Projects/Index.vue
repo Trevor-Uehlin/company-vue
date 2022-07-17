@@ -94,9 +94,6 @@ export default {
             if(confirm("Are you sure you want to delete this project?")) {
                 this.$inertia.delete(this.route('projects.destroy', id));
             }
-        },
-        incrementIndex($index) {
-            return $index +1;
         }
     },
 }

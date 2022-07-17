@@ -55,9 +55,9 @@ export default {
 
         const form = useForm({
 
-            priority: null,
+            priority: 1,
             description: null,
-            url: null
+            url: "/"
         });
 
         return {form};
@@ -67,7 +67,7 @@ export default {
             this.form.post(route("toDo.store"));
         },
         cancel() {
-            this.$inertia.get(route("toDo"));
+            this.$inertia.get(route("toDo.index"));
         }
     },
 
