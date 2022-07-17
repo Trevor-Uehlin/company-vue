@@ -46,6 +46,8 @@ Route::get('set/image/{id}', [App\Http\Controllers\ProfileController::class, 'se
 // Index is a public route...the rest are admin only.  (see the constructor)
 Route::resource('/projects', 'App\Http\Controllers\ProjectController')->names(['index' => 'projects']);
 
+Route::resource('/toDo', 'App\Http\Controllers\ToDoController');
+
 
 Route::resource('/images', 'App\Http\Controllers\ImageController');
 

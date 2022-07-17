@@ -37,6 +37,8 @@
                         <i class="fa fa-plus mb-2" style="font-size:20px;color:blue;"></i><Link :href="route('users.create')"> Create a New User</Link>
                         <br />
                         <i class="fa fa-user" style="font-size:20px;color:blue;"></i><Link :href="route('users.index')"> Manage Users</Link>
+                        <br />
+                        <i class="fa fa-tasks" style="font-size:20px;color:blue;"></i><Link :href="route('toDo.index')"> Site To Do List</Link>
                     </div>
                 </div>
             </div>
